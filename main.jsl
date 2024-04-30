@@ -1,0 +1,106 @@
+NamesDefaultToHere(1);
+
+//gdd = GetPathVariable("ADDIN_HOME(com.jmp.eric.booyah)");
+gdd = GetDefaultDirectory();
+If (Hostis("Windows"),
+    gdd = ConvertFilePath(gdd, windows);
+);
+
+showMessage = Function({ message = "" },
+	dlg = NewWindow("", Type("Modal Dialog"),
+		VListBox(
+			SpacerBox(),
+			TextBox(message,
+				<< JustifyText("center");
+			),
+			SpacerBox(),
+			ButtonBox("Close",
+				dlg << CloseWindow;
+			),
+			SpacerBox()
+		)
+	);
+);
+
+win = NewWindow("JMP-Python Setup",
+	TabBox(
+		TabPageBox(
+			Title("Setup"),
+			HListBox(
+				SpacerBox(),
+				VListBox(
+					SpacerBox(),
+					tbProcess = TextBox("Prepare",
+						<< JustifyText("center");
+					),
+					SpacerBox(),
+					btnStart = ButtonBox("Start",
+						PythonSubmitFile(gdd || "scripts/setup.py");
+					),
+					btnClose = ButtonBox("Close",
+						win << CloseWindow;
+					),
+					SpacerBox()
+				),
+				SpacerBox()
+			)
+		),
+		TabPageBox(
+			Title("Requirements"),
+			HListBox(
+				SpacerBox(),
+				VListBox(
+					SpacerBox(),
+					cbRequire = CheckBox({ "use file" },
+						If (cbRequire << Get(),
+							sbList << Visibility("Collapse");
+							hbFile << Visibility("Visible");
+						,
+							sbList << Visibility("Visible");
+							hbFile << Visibility("Collapse");
+						);
+					),
+					sbList = ScriptBox(
+						"# list of requirements\!N",
+						"Text"
+					),
+					hbFile = HListBox(
+						ButtonBox("Select",
+							tbFile << SetText(PickFile(
+								"Select requirements file",
+								"$DOCUMENTS",
+								{ "Requirements File|txt" }
+							));
+						),
+						tbFile = TextBox("",
+							<< JustifyText("left");
+						)
+					),
+					SpacerBox(),
+					HListBox(
+						SpacerBox(),
+						tbRequireProgress = TextBox("",
+							<< JustifyText("left");
+						),
+						ButtonBox("Install",
+							useFile = cbRequire << Get();
+							reqList = sbList << GetText();
+							reqFile = tbFile << GetText();
+
+							PythonSend(gdd);
+							PythonSend(useFile);
+							PythonSend(reqList);
+							PythonSend(reqFile);
+							PythonSubmitFile(gdd || "scripts/install_requires.py");
+						)
+					),
+					SpacerBox()
+				),
+				SpacerBox()
+			)
+		)
+	),
+	btnClose << Visibility("Collapse");
+	hbFile << Visibility("Collapse");
+);
+win << SetWindowSize(400, 200);
