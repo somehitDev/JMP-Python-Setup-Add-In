@@ -1,25 +1,8 @@
 NamesDefaultToHere(1);
 
-//gdd = GetPathVariable("ADDIN_HOME(com.jmp.eric.booyah)");
 gdd = GetDefaultDirectory();
 If (Hostis("Windows"),
     gdd = ConvertFilePath(gdd, windows);
-);
-
-showMessage = Function({ message = "" },
-	dlg = NewWindow("", Type("Modal Dialog"),
-		VListBox(
-			SpacerBox(),
-			TextBox(message,
-				<< JustifyText("center");
-			),
-			SpacerBox(),
-			ButtonBox("Close",
-				dlg << CloseWindow;
-			),
-			SpacerBox()
-		)
-	);
 );
 
 win = NewWindow("JMP-Python Setup",
@@ -50,20 +33,18 @@ win = NewWindow("JMP-Python Setup",
 			HListBox(
 				SpacerBox(),
 				VListBox(
-					SpacerBox(),
 					cbRequire = CheckBox({ "use file" },
 						If (cbRequire << Get(),
-							sbList << Visibility("Collapse");
+							bhList << Visibility("Collapse");
 							hbFile << Visibility("Visible");
 						,
-							sbList << Visibility("Visible");
+							bhList << Visibility("Visible");
 							hbFile << Visibility("Collapse");
 						);
+						
+						win << SetWindowSize(400, 200);
 					),
-					sbList = ScriptBox(
-						"# list of requirements\!N",
-						"Text"
-					),
+					SpacerBox(),
 					hbFile = HListBox(
 						ButtonBox("Select",
 							tbFile << SetText(PickFile(
@@ -74,6 +55,12 @@ win = NewWindow("JMP-Python Setup",
 						),
 						tbFile = TextBox("",
 							<< JustifyText("left");
+						)
+					),
+					bhList = HListBox(
+						sbList = ScriptBox(
+							"# list of requirements\!N",
+							"Text"
 						)
 					),
 					SpacerBox(),
@@ -95,8 +82,7 @@ win = NewWindow("JMP-Python Setup",
 						)
 					),
 					SpacerBox()
-				),
-				SpacerBox()
+				)
 			)
 		)
 	),

@@ -3,17 +3,15 @@ import os, sys, jmp, pathlib, subprocess
 
 
 # get jmp and user home path
-jmp_path = pathlib.Path(sys.executable).resolve()
+python_path = pathlib.Path(jmp.PYTHON_EXE).resolve()
 user_home_dir = pathlib.Path(os.path.expanduser("~")).resolve()
 
 # find python, jsite file path and PYTHONUSERBASE
 if sys.platform == "darwin":
-	python_path = jmp_path.parent.parent.joinpath("Frameworks", "Python.framework", "Versions", "Current", "bin", "python3")
 	jsite_file = str(python_path.parent.joinpath("jsite.py"))
 	python_userbase = user_home_dir.joinpath("Library", "Application Support", "JMP", "Python", "3.11")
 else:
-	python_path = jmp_path.parent.joinpath("jmp_python.exe")
-	jsite_file = str(jmp_path.parent.joinpath("jsite.py"))
+	jsite_file = str(python_path.parent.joinpath("jsite.py"))
 	python_userbase = user_home_dir.joinpath("AppData", "Roaming", "JMP", "JMP", "Python")
 
 # run jsite.py
