@@ -34,6 +34,9 @@ export PYTHONUSERBASE="{python_userbase}"
 export PATH="{python_userbase_bin}:$PATH"
 """)
 	jmp.run_jsl('tbProcess << SetText("Set Environment Complete!");')
+else:
+	os.system(f'setx PYTHONUSERBASE="{python_userbase}"')
+	os.system(f'setx PATH="%PATH%;{python_userbase_bin}"')
 
 jmp.run_jsl("""
 tbProcess << SetText("Finished!");

@@ -6,6 +6,7 @@ If (Hostis("Windows"),
 );
 
 win = NewWindow("JMP-Python Setup",
+    ShowMenu(0), ShowToolbars(0),
 	TabBox(
 		TabPageBox(
 			Title("Setup"),
