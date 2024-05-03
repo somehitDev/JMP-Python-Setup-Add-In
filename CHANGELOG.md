@@ -2,6 +2,7 @@
 - first release
 
 ## 2024.05.03
+- add "README.md" and "CHANGELOG.md"
 - change python path to jmp.PYTHON_EXE(not find path by sys.executable)
 - fix auto resizing when check/uncheck require file
 - scriptbox now hide normally
