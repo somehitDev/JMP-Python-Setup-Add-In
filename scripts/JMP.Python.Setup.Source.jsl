@@ -1,0 +1,43 @@
+NamesDefaultToHere(1);
+
+Setup = Function({ defaultInstallPackages = "pandas scipy PySide6" },
+    PythonSend(defaultInstallPackages);
+    PythonSubmit("\[
+import os, sys, jmp, pathlib, subprocess, jmputils
+
+
+# get jmp and user home path
+python_path = pathlib.Path(jmp.PYTHON_EXE).resolve()
+user_home_dir = pathlib.Path(os.path.expanduser("~")).resolve()
+
+# find python, jsite file path and PYTHONUSERBASE
+if sys.platform == "darwin":
+	jsite_file = str(python_path.parent.joinpath("jsite.py"))
+	python_userbase = user_home_dir.joinpath("Library", "Application Support", "JMP", "Python", "3.11")
+else:
+	jsite_file = str(python_path.parent.joinpath("jsite.py"))
+	python_userbase = user_home_dir.joinpath("AppData", "Roaming", "JMP", "JMP", "Python")
+
+# run jsite.py
+subprocess.call([ str(python_path), jsite_file ], env = { "PYTHONUSERBASE": str(python_userbase) })
+
+# copy python as jmp_python and append to path(if MAC)
+if sys.platform == "darwin":
+	python_userbase_bin = python_userbase.joinpath("bin")
+	if not python_userbase_bin.exists():
+		os.mkdir(str(python_userbase_bin))
+
+		os.symlink(str(python_path), str(python_userbase_bin.joinpath("jmp_python")))
+		
+		with open(str(user_home_dir.joinpath(".zshrc")), "a", encoding = "utf-8") as vfw:
+			vfw.write(f"""# JMP
+export PYTHONUSERBASE="{python_userbase}"
+export PATH="{python_userbase_bin}:$PATH"
+""")
+else:
+	os.system(f'setx PYTHONUSERBASE="{python_userbase}"')
+	os.system(f'setx PATH="%PATH%;{python_userbase_bin}"')
+
+jmputils.jpip("install", defaultInstallPackages)
+]\");
+);
