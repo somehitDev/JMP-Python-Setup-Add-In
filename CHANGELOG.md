@@ -7,3 +7,6 @@
 - hide menubar and toolbar from window
 - fix auto resizing when check/uncheck require file
 - scriptbox now hide normally
+
+## 2024.07.25
+- fix bug from `setup.py` file.

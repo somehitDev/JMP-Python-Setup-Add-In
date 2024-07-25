@@ -24,7 +24,7 @@ if sys.platform == "darwin":
 	jmp.run_jsl('tbProcess << SetText("Set Environment...(MAC only)");')
 	python_userbase_bin = python_userbase.joinpath("bin")
 	if not python_userbase_bin.exists():
-		os.mkdir(str(python_userbase_bin))
+		os.makedirs(str(python_userbase_bin))
 
 		os.symlink(str(python_path), str(python_userbase_bin.joinpath("jmp_python")))
 		
