@@ -40,6 +40,5 @@ else:
 
 jmp.run_jsl("""
 tbProcess << SetText("Finished!");
-btnStart << Visibility("Collapse");
-btnClose << Visibility("Visible");
+tb << SetSelected(2);
 """)

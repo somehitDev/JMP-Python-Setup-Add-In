@@ -7,22 +7,23 @@ If (Hostis("Windows"),
 
 win = NewWindow("JMP-Python Setup",
     ShowMenu(0), ShowToolbars(0),
-	TabBox(
+	tb = TabBox(
 		TabPageBox(
 			Title("Setup"),
-			HListBox(
+			VListBox(
 				SpacerBox(),
-				VListBox(
+				HListBox(
 					SpacerBox(),
 					tbProcess = TextBox("Prepare",
 						<< JustifyText("center");
 					),
+					SpacerBox()
+				),
+				SpacerBox(),
+				HListBox(
 					SpacerBox(),
 					btnStart = ButtonBox("Start",
 						PythonSubmitFile(gdd || "scripts/setup.py");
-					),
-					btnClose = ButtonBox("Close",
-						win << CloseWindow;
 					),
 					SpacerBox()
 				),
@@ -34,51 +35,37 @@ win = NewWindow("JMP-Python Setup",
 			HListBox(
 				SpacerBox(),
 				VListBox(
-					cbRequire = CheckBox({ "use file" },
-						If (cbRequire << Get(),
-							bhList << Visibility("Collapse");
-							hbFile << Visibility("Visible");
-						,
-							bhList << Visibility("Visible");
-							hbFile << Visibility("Collapse");
-						);
-						
-						win << SetWindowSize(400, 200);
-					),
 					SpacerBox(),
-					hbFile = HListBox(
-						ButtonBox("Select",
-							tbFile << SetText(PickFile(
-								"Select requirements file",
-								"$DOCUMENTS",
-								{ "Requirements File|txt" }
-							));
-						),
-						tbFile = TextBox("",
-							<< JustifyText("left");
-						)
+					ButtonBox("Load File...",
+						requireFile = PickFile(
+							"Select requirements file",
+							"$DOCUMENTS",
+							{ "Requirements File|txt" }
+						);
+
+						PythonSend(requireFile);
+						PythonSubmitFile(gdd || "scripts/load_require_file.py");
+						sbList << SetText(PythonGet("requireList"));
 					),
-					bhList = HListBox(
+					HListBox(
 						sbList = ScriptBox(
 							"# list of requirements\!N",
-							"Text"
+							"Text", 350, 250
 						)
 					),
 					SpacerBox(),
 					HListBox(
 						SpacerBox(),
-						tbRequireProgress = TextBox("",
-							<< JustifyText("left");
+						VListBox(
+							SpacerBox(),
+							tbRequireProgress = TextBox("",
+								<< JustifyText("right");
+							),
+							SpacerBox()
 						),
 						ButtonBox("Install",
-							useFile = cbRequire << Get();
-							reqList = sbList << GetText();
-							reqFile = tbFile << GetText();
-
 							PythonSend(gdd);
-							PythonSend(useFile);
-							PythonSend(reqList);
-							PythonSend(reqFile);
+							PythonSend(sbList << GetText(), "reqList");
 							PythonSubmitFile(gdd || "scripts/install_requires.py");
 						)
 					),
@@ -87,7 +74,6 @@ win = NewWindow("JMP-Python Setup",
 			)
 		)
 	),
-	btnClose << Visibility("Collapse");
-	hbFile << Visibility("Collapse");
+	<< SetWindowSize(400, 300);
 );
-win << SetWindowSize(400, 200);
+//win << SetWindowSize(400, 200);

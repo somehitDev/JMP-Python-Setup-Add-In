@@ -10,3 +10,17 @@
 
 ## 2024.07.25
 - fix bug from `setup.py` file.
+
+## 2024.11.13
+- change ui.
+  - `Setup` page
+    - remove `Close` button.
+    - align horizontally center all elements.
+  - `Requirements` page
+    - align vertically center progress TextBox.
+    - remove `use file` checkbox and file selector.
+    - add `Load File...` button.
+      - if select by this button, replace content of ScriptBox to contents of requirements file.
+- add `load_require_file.py`.
+- fix `setup.py`, `install_requires.py` according to changes of ui.
+- replace images by above.
