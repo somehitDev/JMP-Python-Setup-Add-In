@@ -1,5 +1,0 @@
-NamesDefaultToHere(1);
-
-Include("JMP.Python.Setup.jsl");
-
-Setup();

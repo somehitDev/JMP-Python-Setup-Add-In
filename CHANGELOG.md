@@ -24,3 +24,9 @@
 - add `load_require_file.py`.
 - fix `setup.py`, `install_requires.py` according to changes of ui.
 - replace images by above.
+
+## 2024.11.19
+- exclude `JMP.Python.Setup.*` files.
+- `setup.py`
+  - copy `dt2pandas.py` to `site-packages` after setup.
+  - fix bug from on windows.

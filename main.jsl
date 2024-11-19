@@ -64,8 +64,10 @@ win = NewWindow("JMP-Python Setup",
 							SpacerBox()
 						),
 						ButtonBox("Install",
+                            reqList = sbList << GetText();
+
 							PythonSend(gdd);
-							PythonSend(sbList << GetText(), "reqList");
+							PythonSend(reqList);
 							PythonSubmitFile(gdd || "scripts/install_requires.py");
 						)
 					),
