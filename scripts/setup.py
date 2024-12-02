@@ -16,7 +16,7 @@ else:
 
 # run jsite.py
 jmp.run_jsl('tbProcess << SetText("Running `jsite.py`...");')
-subprocess.call([ str(python_path), jsite_file ], env = { "PYTHONUSERBASE": str(python_userbase) })
+# subprocess.call([ str(python_path), jsite_file ], env = { "PYTHONUSERBASE": str(python_userbase) })
 jmp.run_jsl('tbProcess << SetText("`jsite.py` Complete!");')
 
 # post setup(environment variable, copy dt2pandas.py)
@@ -39,8 +39,8 @@ if sys.platform == "darwin":
     shutil.copyfile(os.path.join(jmp.SAMPLE_SCRIPTS, "Python", "dt2pandas.py"), str(python_userbase.joinpath("lib", "python", "site-packages", "dt2pandas.py")))
 else:
     # register environment
-    os.system(f'setx PYTHONUSERBASE="{python_userbase}"')
-    os.system(f'setx PATH="%PATH%;{python_path.parent}"')
+    os.system(f'setx /M PYTHONUSERBASE "{python_userbase}"')
+    os.system(f'setx /M PATH "%PATH%;{python_path.parent}"')
 
     shutil.copyfile(os.path.join(jmp.SAMPLE_SCRIPTS, "Python", "dt2pandas.py"), str(python_userbase.joinpath("Python311", "site-packages", "dt2pandas.py")))
 

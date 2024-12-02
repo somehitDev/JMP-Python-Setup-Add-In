@@ -43,9 +43,11 @@ win = NewWindow("JMP-Python Setup",
 							{ "Requirements File|txt" }
 						);
 
-						PythonSend(requireFile);
-						PythonSubmitFile(gdd || "scripts/load_require_file.py");
-						sbList << SetText(PythonGet("requireList"));
+						If(requireFile != "",
+							PythonSend(requireFile);
+							PythonSubmitFile(gdd || "scripts/load_require_file.py");
+							sbList << SetText(PythonGet("requireList"));
+						);
 					),
 					HListBox(
 						sbList = ScriptBox(

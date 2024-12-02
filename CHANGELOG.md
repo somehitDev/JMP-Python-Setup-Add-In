@@ -30,3 +30,8 @@
 - `setup.py`
   - copy `dt2pandas.py` to `site-packages` after setup.
   - fix bug from on windows.
+
+## 2024.12.02
+- fix bugs.
+  - fix error when cancel import requirement file by `Load File...` button.
+  - fix error when add jmp path to system variables on windows.
