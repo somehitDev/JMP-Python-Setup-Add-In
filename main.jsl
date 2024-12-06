@@ -5,7 +5,7 @@ If (Hostis("Windows"),
     gdd = ConvertFilePath(gdd, windows);
 );
 
-win = NewWindow("JMP-Python Setup",
+win = NewWindow("Python Setup Interface",
     ShowMenu(0), ShowToolbars(0),
 	tb = TabBox(
 		TabPageBox(
