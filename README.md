@@ -19,22 +19,22 @@
 <br/><br/>
 
 ## 🌐 install
-- download latest "jmpaddin" file from <a href="https://github.com/oyajiDev/JMP-Python-Setup-Add-In/releases">releases</a>
+- download latest "jmpaddin" file from <a href="https://github.com/somehitDev/Python-Setup-Interface/releases">releases</a>
 - open "jmpaddin" file in JMP
 
 <br/><br/>
 
 ## 🛠 usage
-- click "Add-In" > "JMP-Python Setup" on menu.
+- click "Add-In" > "Python Setup Interface" on menu.
 
 #### Setup
-<img src="https://github.com/oyajiDev/JMP-Python-Setup-Add-In/blob/main/assets/preview_setup.png?raw=true"></img><br/>
+<img src="https://github.com/somehitDev/Python-Setup-Interface/blob/main/assets/preview_setup.png?raw=true"></img><br/>
 - click "Start" button
 - wait until "Finished!" appears
 
 #### Requirements
 ※ "Setup" must proceed before this job!
-<br/><img src="https://github.com/oyajiDev/JMP-Python-Setup-Add-In/blob/main/assets/preview_require.png?raw=true"></img><br/>
+<br/><img src="https://github.com/somehitDev/Python-Setup-Interface/blob/main/assets/preview_require.png?raw=true"></img><br/>
 - fill scriptbox if "use file" is not selected
 - select "requirements" file if "use file" is selected
 - click "Install" button
