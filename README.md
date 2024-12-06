@@ -1,8 +1,8 @@
 <h1 align="center">
-    JMP-Python-Setup Add-In
+    Python Setup Interface
 </h1>
 <p align="center">
-    automatically setup jmp_python on JMP 18
+    Add-in for automatically setup `jmp_python` on JMP 18
 </p>
 <br/>
 

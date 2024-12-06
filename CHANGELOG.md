@@ -35,3 +35,9 @@
 - fix bugs.
   - fix error when cancel import requirement file by `Load File...` button.
   - fix error when add jmp path to system variables on windows.
+
+## 2024.12.06
+- minor changes.
+  - integrated common variables.
+  - remove unused `import` statements.
+- rename repository and fix `README.md`.

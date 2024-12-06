@@ -7,16 +7,15 @@ python_path = pathlib.Path(jmp.PYTHON_EXE).resolve()
 user_home_dir = pathlib.Path(os.path.expanduser("~")).resolve()
 
 # find python, jsite file path and PYTHONUSERBASE
+jsite_file = str(python_path.parent.joinpath("jsite.py"))
 if sys.platform == "darwin":
-    jsite_file = str(python_path.parent.joinpath("jsite.py"))
     python_userbase = user_home_dir.joinpath("Library", "Application Support", "JMP", "Python", "3.11")
 else:
-    jsite_file = str(python_path.parent.joinpath("jsite.py"))
     python_userbase = user_home_dir.joinpath("AppData", "Roaming", "JMP", "JMP", "Python")
 
 # run jsite.py
 jmp.run_jsl('tbProcess << SetText("Running `jsite.py`...");')
-# subprocess.call([ str(python_path), jsite_file ], env = { "PYTHONUSERBASE": str(python_userbase) })
+subprocess.call([ str(python_path), jsite_file ], env = { "PYTHONUSERBASE": str(python_userbase) })
 jmp.run_jsl('tbProcess << SetText("`jsite.py` Complete!");')
 
 # post setup(environment variable, copy dt2pandas.py)
